@@ -39,25 +39,28 @@
             <button id="flipQuorumButton" onClick={this.quorumChanger}> </button>
           );
         },
+        conditionalRender: function() {
+          if (window.isBig === 1) {
+            ReactDOM.render (
+              <BigQuorumBox/>,
+              document.getElementById('htmlMagic')
+            );
+          }
+          if (window.isBig === 0) {
+            ReactDOM.render(
+              <SmallQuorumBox/>,
+              document.getElementById('htmlMagic')
+            );
+          }
+        },
+        componentDidMount: function() {
+          window.addEventListener("resize", this.conditionalRender)
+        },
         quorumChanger : function(){
-        console.log("hiello")
-        if (window.isBig === 0) {window.isBig = 1}
-        else if (window.isBig === 1) {window.isBig = 0}
-
-        if (window.isBig === 1) {
-          ReactDOM.render(
-            <BigQuorumBox/>,
-            document.getElementById('htmlMagic')
-          );
+          console.log("hiello")
+          if (window.isBig === 0) {window.isBig = 1}
+          else if (window.isBig === 1) {window.isBig = 0}
         }
-
-        if (window.isBig === 0) {
-          ReactDOM.render(
-            <SmallQuorumBox/>,
-            document.getElementById('htmlMagic')
-          );
-        }
-      }
       });
       ReactDOM.render(
         <h1>Magic from the outer space!</h1>,
